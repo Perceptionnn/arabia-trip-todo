@@ -1,0 +1,777 @@
+
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viagem Arábia Saudita — Paw Patrol Tour</title>
+<style>
+:root {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --color-background-primary: #121722;
+  --color-background-secondary: #1b2230;
+  --color-text-primary: #f3f6fb;
+  --color-text-secondary: #b7c0cf;
+  --color-text-tertiary: #8994a6;
+  --color-text-danger: #ff8c82;
+  --color-border-primary: #526074;
+  --color-border-secondary: #303a4b;
+  --color-border-tertiary: #263041;
+  --border-radius-md: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #0b0f17; color-scheme: dark; }
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top, #172033 0, #0b0f17 42%, #080b11 100%);
+  color: var(--color-text-primary);
+  padding: 20px;
+}
+.erp {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+.header-title { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.header-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
+.tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.tab { padding: 6px 14px; border-radius: var(--border-radius-md); font-size: 13px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; }
+.tab.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+.section { display: none; }
+.section.active { display: block; }
+.day-block { margin-bottom: 1.25rem; }
+.day-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; padding: 0 4px; }
+.timeline { position: relative; padding-left: 20px; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--color-border-tertiary); }
+.event { position: relative; margin-bottom: 8px; padding: 10px 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); }
+.event::before { content: ''; position: absolute; left: -16px; top: 14px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-background-secondary); border: 1.5px solid var(--color-border-primary); }
+.event.flight::before { background: #7bbcff; border-color: #4da3f7; }
+.event.hotel::before { background: #56d7b0; border-color: #2dbb91; }
+.event.work::before { background: #ff8eb4; border-color: #e65f8d; }
+.event.alert::before { background: #ffd071; border-color: #d89020; }
+.event.show::before { background: #aaa4ff; border-color: #8178f0; }
+.event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.event-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.event-time { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); white-space: nowrap; }
+.event-detail { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-bottom: 5px; }
+.b-flight { background: #173455; color: #a9d5ff; }
+.b-hotel { background: #12392f; color: #95efd4; }
+.b-work { background: #4a1c2e; color: #ffc0d3; }
+.b-show { background: #28265a; color: #d6d2ff; }
+.b-alert { background: #493412; color: #ffdfa3; }
+.b-info { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.info-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 8px; }
+.info-card-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.info-card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.show-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+.show-row:last-child { border-bottom: none; }
+.show-name { color: var(--color-text-secondary); }
+.show-time { font-weight: 500; color: var(--color-text-primary); }
+.prayer-row { display: grid; grid-template-columns: 80px 1fr 1fr 1fr; gap: 4px; font-size: 12px; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+.prayer-row.header { font-weight: 500; color: var(--color-text-primary); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; }
+.stat-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.stat-value { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.task-list { display: grid; gap: 6px; margin-top: 8px; }
+.task { display: grid; grid-template-columns: 18px 1fr; gap: 8px; font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; cursor: pointer; border-radius: 6px; padding: 2px 0; transition: color 0.15s, opacity 0.15s; }
+.task::before { content: ''; width: 12px; height: 12px; border: 1px solid var(--color-border-primary); border-radius: 3px; margin-top: 3px; background: var(--color-background-primary); transition: background 0.15s, border-color 0.15s, box-shadow 0.15s; }
+.task:hover::before { border-color: #7bbcff; box-shadow: 0 0 0 3px rgba(123, 188, 255, 0.12); }
+.task.done { color: var(--color-text-tertiary); opacity: 0.68; }
+.task.done span { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #91a0b5; }
+.task.done::before { content: '✓'; display: grid; place-items: center; background: #2dbb91; border-color: #56d7b0; color: #07130f; font-size: 10px; font-weight: 800; line-height: 1; }
+.task:focus-visible { outline: 2px solid #7bbcff; outline-offset: 3px; }
+.task strong { color: var(--color-text-primary); font-weight: 500; }
+.task.done strong { color: inherit; }
+.mini-note { font-size: 12px; color: var(--color-text-tertiary); margin-top: 6px; line-height: 1.45; }
+.todo-hero { background: linear-gradient(135deg, #1b2230, #121722); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 14px; margin-bottom: 10px; }
+.todo-hero-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
+.todo-hero-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+.todo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; }
+.priority-tag { display: inline-block; font-size: 11px; line-height: 1; padding: 5px 8px; border-radius: 999px; background: #493412; color: #ffdfa3; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+@media (max-width: 720px) {
+  body { padding: 10px; }
+  .erp { padding: 14px; border-radius: 8px; }
+  .header { margin-bottom: 1rem; }
+  .header-title { font-size: 18px; line-height: 1.25; }
+  .header-sub { font-size: 12px; line-height: 1.45; }
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .stat { padding: 10px; }
+  .stat-label { font-size: 11px; }
+  .stat-value { font-size: 16px; }
+  .tabs { gap: 8px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; scrollbar-width: thin; }
+  .tab { flex: 0 0 auto; min-height: 38px; padding: 8px 12px; }
+  .legend { gap: 8px; }
+  .timeline { padding-left: 16px; }
+  .event { padding: 10px; }
+  .event-header { align-items: flex-start; }
+  .event-title { font-size: 13px; line-height: 1.35; }
+  .event-time { font-size: 11px; }
+  .event-detail { font-size: 12px; }
+  .todo-grid { grid-template-columns: 1fr; }
+  .task { grid-template-columns: 22px 1fr; font-size: 13px; padding: 5px 0; }
+  .task::before { width: 16px; height: 16px; margin-top: 2px; }
+  .info-card { padding: 12px; }
+  .prayer-row { grid-template-columns: 64px 1fr 1fr 1fr; }
+}
+@media (max-width: 420px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .event-header { display: block; }
+  .event-time { display: inline-block; margin-top: 4px; }
+  .show-row { align-items: flex-start; gap: 12px; }
+  .show-time { text-align: right; }
+}
+</style>
+</head>
+<body>
+
+<div class="erp">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">ERP da viagem de Bruno à Arábia Saudita — cronologia completa</h2>
+  <div class="header">
+    <div>
+      <div class="header-title">Viagem Arábia Saudita — Paw Patrol Tour</div>
+      <div class="header-sub">Bruno Miguel Nandyala Delgado · Função: Stagehand · Dammam, Saudi Arabia</div>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-label">Partida</div><div class="stat-value">25 maio</div></div>
+    <div class="stat"><div class="stat-label">Chegada (DXB→DMM)</div><div class="stat-value">26 maio</div></div>
+    <div class="stat"><div class="stat-label">Shows</div><div class="stat-value">28 mai–6 jun</div></div>
+    <div class="stat"><div class="stat-label">Regresso</div><div class="stat-value">8 junho</div></div>
+    <div class="stat"><div class="stat-label">Hotel check-out</div><div class="stat-value">8 junho</div></div>
+    <div class="stat"><div class="stat-label">Shows por dia</div><div class="stat-value">3 shows</div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('cronologia')"><i class="ti ti-calendar" aria-hidden="true"></i> Cronologia</div>
+    <div class="tab" onclick="switchTab('afazer')"><i class="ti ti-list-check" aria-hidden="true"></i> A fazer</div>
+    <div class="tab" onclick="switchTab('todo')"><i class="ti ti-checkup-list" aria-hidden="true"></i> To do list</div>
+    <div class="tab" onclick="switchTab('voo')"><i class="ti ti-plane" aria-hidden="true"></i> Voos</div>
+    <div class="tab" onclick="switchTab('hotel')"><i class="ti ti-building" aria-hidden="true"></i> Hotel</div>
+    <div class="tab" onclick="switchTab('shows')"><i class="ti ti-star" aria-hidden="true"></i> Shows</div>
+    <div class="tab" onclick="switchTab('info')"><i class="ti ti-info-circle" aria-hidden="true"></i> Info útil</div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#378ADD;"></div> Voo</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#1D9E75;"></div> Hotel</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#D4537E;"></div> Trabalho</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#7F77DD;"></div> Show</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#BA7517;"></div> Atenção</div>
+  </div>
+
+  <!-- CRONOLOGIA -->
+  <div id="tab-cronologia" class="section active">
+
+    <div class="day-block">
+      <div class="day-label">Domingo, 24 maio — hoje</div>
+      <div class="timeline">
+        <div class="event alert">
+          <div class="event-header"><div class="event-title">Fechar preparação antes da viagem</div><div class="event-time">hoje</div></div>
+          <div class="event-detail">Confirmar documentos, boarding pass, bagagem, roupa técnica, carregadores/adaptadores e ferramentas pequenas se tiveres ou conseguires comprar sem stress.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Estudar vídeo do show</div><div class="event-time">antes de dormir</div></div>
+          <div class="event-detail">Foco nos momentos em que entram/saem puppets/adereços, portas, corda, cortina vermelha danificada e reposição pós-show.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Segunda-feira, 25 maio — Lisboa → Dubai</div>
+      <div class="timeline">
+        <div class="event alert">
+          <div class="event-header"><div class="event-title">Check-in aeroporto Lisboa (LIS)</div><div class="event-time">10:50</div></div>
+          <div class="event-detail">Voo parte às 14:20. Emirates indica check-in às 10:50; chegar antes dá margem para bagagem, segurança e passaporte. Aeroporto Humberto Delgado, Terminal 1.</div>
+        </div>
+        <div class="event alert">
+          <div class="event-header"><div class="event-title">Controlo de segurança — prazo</div><div class="event-time">até 12:50</div></div>
+          <div class="event-detail">O boarding pass indica: drop bags até 12:50 · clear security até 13:20 · boarding 13:20 · Seat 41K</div>
+        </div>
+        <div class="event flight">
+          <div class="badge b-flight">EK192 · Economy · Seat 41K</div>
+          <div class="event-header"><div class="event-title">Partida Lisboa → Dubai</div><div class="event-time">14:20</div></div>
+          <div class="event-detail">Ref. MV2486 · Ticket 176 2210392924 · Seq. 145 · Group 2 · Bagagem porão: 25 kg · Chegada a DXB Terminal 3.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Terça-feira, 26 maio — chegada e instalação</div>
+      <div class="timeline">
+        <div class="event flight">
+          <div class="badge b-flight">EK192 chega a Dubai</div>
+          <div class="event-header"><div class="event-title">Chegada a Dubai (DXB)</div><div class="event-time">01:35</div></div>
+          <div class="event-detail">Voo noturno — hora local Dubai (GMT+4). Chegada ao Terminal 3; ligação para Dammam no mesmo terminal.</div>
+        </div>
+        <div class="event flight">
+          <div class="badge b-flight">EK827 · Dubai → Dammam</div>
+          <div class="event-header"><div class="event-title">Check-in/porta para Dammam</div><div class="event-time">04:40</div></div>
+          <div class="event-detail">Emirates indica check-in/ligação EK827 às 04:40. Partida de Dubai às 07:40, Terminal 3.</div>
+        </div>
+        <div class="event flight">
+          <div class="badge b-flight">EK827 · Economy · Bagagem 25 kg</div>
+          <div class="event-header"><div class="event-title">Chegada a Dammam (DMM)</div><div class="event-time">08:05</div></div>
+          <div class="event-detail">Aeroporto King Fahd International. Transfer organizado pelo EventBox — procura placa com o teu nome ou "EventBox".</div>
+        </div>
+        <div class="event hotel">
+          <div class="badge b-hotel">DoubleTree Hilton Dhahran</div>
+          <div class="event-header"><div class="event-title">Check-in hotel</div><div class="event-time">≈09:00+</div></div>
+          <div class="event-detail">Check-in: 25 maio (mas a tua chegada real é 26). Quarto: TWIN (partilhado com Luís Filipe Santos Mascarenhas). Check-out: 8 junho.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Reconhecimento + coordenação de transporte</div><div class="event-time">tarde</div></div>
+          <div class="event-detail">Hotel fica muito perto do mall/local. Deslocações devem ser combinadas com Pinar e Elia/Ilia, em grupo e por agenda, não por decisões individuais.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Instalação com equipa de produção</div><div class="event-time">noite</div></div>
+          <div class="event-detail">Foco em cortinas, portas, ponto de ativação, mecanismo e soluções rápidas caso algo encrave, caia ou fique solto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Quarta-feira, 27 maio — ensaios</div>
+      <div class="timeline">
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Manhã livre / descanso</div><div class="event-time">manhã</div></div>
+          <div class="event-detail">Pinar, elenco e guarda-roupa terão uma parte de manhã cedo; pela reunião, Bruno não precisa de estar se não for relacionado com backstage.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Ensaio no hotel</div><div class="event-time">16:00–17:00</div></div>
+          <div class="event-detail">Sem mascotes e sem drops grandes. Objetivo: ver o show com Pinar e receber marcações da dance captain: quando entrar no backstage, abrir/fechar portas, preparar props e responder a deixas.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Ensaio no mall/local</div><div class="event-time">depois da meia-noite</div></div>
+          <div class="event-detail">Com mascotes, puppets e drops/adereços já montados. Fazer primeiro passe prático, segundo passe para ganhar rapidez e terceiro passe como show completo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Quinta-feira, 28 maio — primeiro dia de shows</div>
+      <div class="timeline">
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Preset antes do primeiro show</div><div class="event-time">antes das 17:30</div></div>
+          <div class="event-detail">Confirmar com guarda-roupa o que fica contigo e o que fica com ela. Verificar cage/jaula de puppets, autocolantes/estrelas atrás da cortina, corda, portas e comunicação entre lados.</div>
+        </div>
+        <div class="event show">
+          <div class="event-header"><div class="event-title">Primeiro dia de shows — Dhahran Mall</div><div class="event-time">28 maio</div></div>
+          <div class="event-detail">Show 1: 17:30–18:00 · M&G 1: 18:05–18:20 · Show 2: 20:30–21:00 · M&G 2: 21:05–21:20 · Show 3: 22:30–23:00 · M&G 3: 23:05–23:20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">28 maio – 6 junho — período de shows</div>
+      <div class="timeline">
+        <div class="event show">
+          <div class="event-header"><div class="event-title">Shows diários no Dhahran Mall</div><div class="event-time">15:00 – 23:00</div></div>
+          <div class="event-detail">Atividades das 15:00–23:00 · 3 shows por dia + 3 Meet & Greet. Ver tab "Shows" para horários detalhados.</div>
+        </div>
+        <div class="event alert">
+          <div class="event-header"><div class="event-title">Prayer times — pausa de 40 min</div><div class="event-time">Asr ≈15:04</div></div>
+          <div class="event-detail">Asr ~15:04 · Maghrib ~18:26–18:31 · Isha ~19:56–20:01. O show tem break de 40 min — confirma com equipa a gestão das orações.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Rotina de cada show</div><div class="event-time">antes/depois</div></div>
+          <div class="event-detail">Antes: preparar props, cortina, stickers e mecanismos. Durante: seguir dance captain/show caller. Depois: repor cortina, confirmar perdas/danos e deixar tudo pronto para o próximo show.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Sábado, 6 junho — último dia de shows</div>
+      <div class="timeline">
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Último dia de shows</div><div class="event-time">15:00 – 23:00</div></div>
+          <div class="event-detail">Tour book indica shows de 28 maio a 6 junho. Não deixar logística importante para o fim: alguns membros podem ir para o aeroporto antes de certas tarefas acabarem.</div>
+        </div>
+        <div class="event work">
+          <div class="event-header"><div class="event-title">Fecho / preparação de saída</div><div class="event-time">após shows</div></div>
+          <div class="event-detail">Confirmar desmontagem, devolução de ferramentas/material, estado dos props e horários dos transfers de quem sai a 7 e 8 junho.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Domingo, 7 junho — dia tampão / equipa a sair</div>
+      <div class="timeline">
+        <div class="event alert">
+          <div class="event-header"><div class="event-title">Confirmar se há tarefas pendentes</div><div class="event-time">dia</div></div>
+          <div class="event-detail">Alguns elementos têm voos a 7 junho. Usar este dia para resolver pendências, descanso e preparação do regresso de 8 junho.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Segunda-feira, 8 junho — regresso</div>
+      <div class="timeline">
+        <div class="event hotel">
+          <div class="badge b-hotel">Check-out hotel</div>
+          <div class="event-header"><div class="event-title">Saída do DoubleTree Hilton</div><div class="event-time">manhã</div></div>
+          <div class="event-detail">Check-out 8 junho. Confirma hora com hotel.</div>
+        </div>
+        <div class="event flight">
+          <div class="badge b-flight">EK828 · Dammam → Dubai</div>
+          <div class="event-header"><div class="event-title">Check-in Dammam + partida para Dubai</div><div class="event-time">06:30 / 09:30</div></div>
+          <div class="event-detail">Check-in Emirates às 06:30. Partida DMM às 09:30 e chegada a Dubai às 11:55, Terminal 3. Bagagem porão: 25 kg.</div>
+        </div>
+        <div class="event flight">
+          <div class="badge b-flight">EK193 · Dubai → Lisboa</div>
+          <div class="event-header"><div class="event-title">Voo de regresso para Lisboa</div><div class="event-time">14:25 → 19:40</div></div>
+          <div class="event-detail">Check-in/ligação indicada às 11:25. Partida DXB Terminal 3 às 14:25; chegada a Lisboa Terminal 1 às 19:40. Fim da tour.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- A FAZER -->
+  <div id="tab-afazer" class="section">
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-calendar-check" aria-hidden="true"></i> 24 maio — antes de sair</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span><strong>Documentos:</strong> passaporte, boarding pass EK192, recibo/ticket Emirates 176 2210392924, vistos/autorizacoes, seguro e contactos EventBox acessiveis offline.</span></div>
+          <div class="task"><span><strong>Bagagem:</strong> roupa preta/confortavel para backstage, calçado fechado, medicação, adaptador, power bank, carregadores e muda leve para viagem.</span></div>
+          <div class="task"><span><strong>Ferramentas:</strong> se conseguires, levar kit pequeno: multitool/chave de fendas, fita gaffer pequena, abraçadeiras, lanterna/headlamp e luvas. Se nao der, confirmar no local com producao/pessoa local.</span></div>
+          <div class="task"><span><strong>Video do show:</strong> rever uma vez com foco em portas, cortina, corda, entrada/saida de puppets e momentos de corrida no backstage.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-plane" aria-hidden="true"></i> 25–26 maio — viagem e chegada</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span><strong>LIS:</strong> check-in Emirates indicado às 10:50 no Terminal 1. Drop bags ate 12:50, security ate 13:20, boarding 13:20, partida EK192 às 14:20.</span></div>
+          <div class="task"><span><strong>DXB:</strong> chegada prevista 01:35 de 26 maio ao Terminal 3. Fazer ligacao EK827 para Dammam; check-in/porta indicado às 04:40 e partida às 07:40.</span></div>
+          <div class="task"><span><strong>DMM:</strong> chegada prevista 08:05 ao King Fahd International Airport. Procurar representante com placa com o teu nome ou EventBox.</span></div>
+          <div class="task"><span><strong>Hotel/local:</strong> confirmar no check-in o DoubleTree by Hilton Dhahran, quarto TWIN, lavandaria 3 pecas/dia e horarios de transporte em grupo.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-tool" aria-hidden="true"></i> 26 maio — instalação no mall</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span><strong>Cortina/portas:</strong> perceber onde esta o ponto de ativacao, como operar o mecanismo e como repor rapidamente se algo falhar.</span></div>
+          <div class="task"><span><strong>Backstage:</strong> mapear lado do Bruno, lado da outra pessoa local, guarda-roupa, backup, caminhos de entrada/saida do elenco e zonas de props.</span></div>
+          <div class="task"><span><strong>Props:</strong> identificar cage/jaula dos puppets/adereços e separar o que e tua responsabilidade do que pertence ao guarda-roupa.</span></div>
+          <div class="task"><span><strong>Plano B:</strong> perguntar que ferramentas existem no local e quem decide reparacoes rapidas durante o show.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-run" aria-hidden="true"></i> 27 maio — ensaios e memorização</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span><strong>Manha:</strong> descansar se nao fores chamado para a parte de Pinar/elenco/guarda-roupa.</span></div>
+          <div class="task"><span><strong>16:00–17:00:</strong> ensaio no hotel sem mascotes/drops. Pedir a dance captain as deixas exatas: abrir porta, fechar porta, entregar corda, trazer/retirar puppets.</span></div>
+          <div class="task"><span><strong>Depois da meia-noite:</strong> ensaio no mall com mascotes, puppets e drops. Fazer 3 passes: aprendizagem, rapidez/correcao, show completo.</span></div>
+          <div class="task"><span><strong>Notas pessoais:</strong> escrever numa folha/telemovel a sequencia por ordem, com palavras-chave de audio/cena para cada acao.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-star" aria-hidden="true"></i> 28 maio–6 junho — rotina de cada show</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span><strong>Antes de cada show:</strong> props no sitio certo, stickers/estrelas na parede atras da cortina, corda pronta, cortina preparada, portas testadas.</span></div>
+          <div class="task"><span><strong>Durante:</strong> seguir show caller/dance captain, manter comunicacao com o outro lado, entregar corda/elementos ao elenco no timing certo e reagir sem bloquear passagens.</span></div>
+          <div class="task"><span><strong>Depois:</strong> repor a cortina, verificar parafusos/partes soltas, reorganizar cage/props e deixar o preset pronto para o show seguinte.</span></div>
+          <div class="task"><span><strong>Ao fim do dia:</strong> reportar danos, materiais em falta e necessidades de ferramenta antes do dia seguinte.</span></div>
+        </div>
+        <div class="mini-note">Mensagem central da reunião: o trabalho dificil e antes dos shows ao vivo. Depois de memorizar timings e backstage, a operação deve ficar fluida.</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Pendências a confirmar com a equipa</div>
+      <div class="info-card-body">
+        <div class="task-list">
+          <div class="task"><span>Nome/contacto da pessoa local que fica contigo no backstage.</span></div>
+          <div class="task"><span>Quem traz ferramentas e onde ficam guardadas durante o evento.</span></div>
+          <div class="task"><span>Horario exato do transporte hotel ⇄ mall em dias de montagem, ensaio e shows.</span></div>
+          <div class="task"><span>Confirmar se ha atividades/tarefas para ti fora do backstage quando nao ha show.</span></div>
+          <div class="task"><span>Plano de desmontagem e quem sai a 7 junho, para nao deixar nada essencial para a ultima hora.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TO DO LIST COMPLETA -->
+  <div id="tab-todo" class="section">
+    <div class="todo-hero">
+      <div class="priority-tag">Hoje + amanhã antes de embarcar</div>
+      <div class="todo-hero-title">To-Do List Completa — Viagem para a Arábia Saudita</div>
+      <div class="todo-hero-body">Checklist prática para fechares documentos, voos, telemóvel, bagagem, backstage e chegada sem depender da memória quando já estiveres em modo aeroporto.</div>
+    </div>
+
+    <div class="todo-grid">
+      <div class="info-card">
+        <div class="info-card-title">Prioridade máxima — documentos e acessos</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Passaporte válido, físico contigo, com validade confortável além da viagem.</span></div>
+            <div class="task"><span>Confirmar que o nome do bilhete corresponde ao passaporte. O “BRUNOMIGUELMR” é normalmente o tratamento “MR” colado ao nome.</span></div>
+            <div class="task"><span>Visto da Arábia Saudita acessível no telemóvel e guardado como PDF offline.</span></div>
+            <div class="task"><span>Guardar bilhetes Emirates, visto, seguro se existir, booking/hotel, contactos da produção, Teresa e Vlad.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Redundância de documentos</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Criar pasta no telemóvel chamada <strong>ARABIA</strong>.</span></div>
+            <div class="task"><span>Guardar screenshots offline de voo, visto, hotel, contactos e mapa hotel → venue.</span></div>
+            <div class="task"><span>Fazer backup no Google Drive e enviar cópias para o próprio email.</span></div>
+            <div class="task"><span>Idealmente imprimir voo, visto e hotel.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Check-in e voos — Emirates</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Confirmar que todos os segmentos aparecem: EK192, EK827, EK828 e EK193.</span></div>
+            <div class="task"><span>Lisboa: Terminal 1, check-in indicado às 10:50, partida às 14:20.</span></div>
+            <div class="task"><span>Dubai: chegada 01:35, Terminal 3; ligação EK827 com partida às 07:40.</span></div>
+            <div class="task"><span>Confirmar gate no próprio dia e se o boarding pass do segundo voo já aparece.</span></div>
+            <div class="task"><span>Confirmar bagagem de cabine e porão: bilhete indica 25 kg porão; cabine Economy até 7 kg.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Escala no Dubai</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Verificar imediatamente o próximo gate quando chegares.</span></div>
+            <div class="task"><span>O aeroporto é enorme: manter atenção ao tempo restante.</span></div>
+            <div class="task"><span>Confirmar se tens nova segurança ou mudança interna de zona.</span></div>
+            <div class="task"><span>Hidratar, carregar telemóvel e evitar perder demasiado tempo nas lojas.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Telemóvel, internet e dinheiro</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Levar carregador, powerbank carregada, cabo extra e adaptador internacional.</span></div>
+            <div class="task"><span>Verificar roaming da operadora na Arábia Saudita ou comprar eSIM antes da viagem.</span></div>
+            <div class="task"><span>Instalar/logar: Emirates, Google Maps offline, Uber, Careem, Revolut e WhatsApp.</span></div>
+            <div class="task"><span>Confirmar Revolut funcional, plafond, dinheiro físico em euros e um cartão secundário de backup.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Bagagem — roupa e higiene</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Roupa preta suficiente: t-shirts, calças, ténis confortáveis pretos e hoodie/casaco leve para AC.</span></div>
+            <div class="task"><span>Roupa casual leve para calor, roupa confortável de hotel, chinelos, boxers e meias suficientes.</span></div>
+            <div class="task"><span>Higiene: escova/pasta, desodorizante, perfume pequeno, shampoo pequeno, corta-unhas e medicação se necessário.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Kit stagehand / backstage</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Mochila de trabalho: multitool, fita isoladora preta, marcador permanente, garrafa reutilizável, snacks, earbuds/tampões, powerbank e carregador rápido.</span></div>
+            <div class="task"><span>Antes do show: verificar props, caminhos livres, resets, entradas/saídas, perigos e cabos.</span></div>
+            <div class="task"><span>Durante: antecipar problemas, observar performers, perceber cues, manter discrição e nunca bloquear backstage.</span></div>
+            <div class="task"><span>Depois: resets rápidos, confirmar material e ajudar antes de te pedirem.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Saúde, conforto e voo longo</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Levar phones, filmes/séries offline, hoodie e almofada cervical se tiveres.</span></div>
+            <div class="task"><span>Hidratar bastante e evitar álcool excessivo.</span></div>
+            <div class="task"><span>Dormir decentemente hoje: amanhã tens aeroporto, filas, voo longo e mudança forte de ambiente.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Cultura e regras</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Evitar discussões políticas/religiosas e manter comportamento respeitador em público.</span></div>
+            <div class="task"><span>Evitar fotografar pessoas aleatórias.</span></div>
+            <div class="task"><span>Cuidado com conteúdo explícito no telemóvel.</span></div>
+            <div class="task"><span>Roupa normal e discreta chega perfeitamente.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Hotel</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>DoubleTree by Hilton Dhahran: guardar morada no Maps e contacto do hotel.</span></div>
+            <div class="task"><span>Confirmar pequeno-almoço incluído.</span></div>
+            <div class="task"><span>Confirmar política de lavandaria: tour book indica 3 peças/dia.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Contactos importantes</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Guardar favoritos: Teresa, Vlad, Joe, hotel e produção local.</span></div>
+            <div class="task"><span>Criar nota offline <strong>EMERGÊNCIA ARABIA</strong> com nomes, hotel, voos, números e moradas.</span></div>
+            <div class="task"><span>À chegada à Arábia: ligar net/eSIM, avisar Teresa/Vlad, confirmar quem recolhe crew e seguir com o grupo português se possível.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Antes de sair de casa</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Passaporte, carteira, telemóvel, carregador, powerbank e auscultadores.</span></div>
+            <div class="task"><span>Visto, boarding pass, roupa preta, cartões e chaves de casa.</span></div>
+            <div class="task"><span>No aeroporto de Lisboa: chegar idealmente 3 horas antes, fazer check bagagem, segurança, confirmar gate e confirmar boarding Dubai → Arábia.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Objetivo real da viagem</div>
+      <div class="info-card-body">
+        Mais do que “ir fazer shows”, isto é primeira impressão internacional, networking, reputação, profissionalismo, calma sob pressão, absorver workflows profissionais e ganhar confiança real em backstage/eventos. Se fores observador, calmo e proativo, vais aprender imenso nestes dias.
+      </div>
+    </div>
+  </div>
+
+  <!-- VOOS -->
+  <div id="tab-voo" class="section">
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-plane-departure" aria-hidden="true"></i> Voo de ida — 25 maio</div>
+      <div class="info-card-body">
+        <b style="color:var(--color-text-primary)">EK192</b> Lisboa (LIS) → Dubai (DXB)<br>
+        Check-in: <b style="color:var(--color-text-primary)">10:50</b> · Partida: <b style="color:var(--color-text-primary)">14:20</b> · Chegada DXB: <b style="color:var(--color-text-primary)">01:35</b> (26 mai)<br>
+        LIS Terminal 1 · DXB Terminal 3 · Referência: MV2486 · Ticket: 176 2210392924 · Seq. 145 · Seat <b style="color:var(--color-text-primary)">41K</b> · Economy Saver · Bagagem: 25 kg<br><br>
+        <b style="color:var(--color-text-primary)">EK827</b> Dubai (DXB) → Dammam (DMM)<br>
+        Check-in/ligação: <b style="color:var(--color-text-primary)">04:40</b> · Partida DXB T3: <b style="color:var(--color-text-primary)">07:40</b> · Chegada Dammam: <b style="color:var(--color-text-primary)">08:05</b> (26 mai) · Bagagem: 25 kg
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-plane-arrival" aria-hidden="true"></i> Voo de regresso — 8 junho</div>
+      <div class="info-card-body">
+        <b style="color:var(--color-text-primary)">EK828</b> Dammam (DMM) → Dubai (DXB)<br>
+        Check-in: <b style="color:var(--color-text-primary)">06:30</b> · Partida: <b style="color:var(--color-text-primary)">09:30</b> · Chegada DXB T3: <b style="color:var(--color-text-primary)">11:55</b> · Bagagem: 25 kg<br><br>
+        <b style="color:var(--color-text-primary)">EK193</b> Dubai (DXB) → Lisboa (LIS)<br>
+        Check-in/ligação: <b style="color:var(--color-text-primary)">11:25</b> · Partida DXB T3: <b style="color:var(--color-text-primary)">14:25</b> · Chegada Lisboa T1: <b style="color:var(--color-text-primary)">19:40</b>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Atenção no aeroporto — 25 maio</div>
+      <div class="info-card-body">
+        Check-in Emirates: <b style="color:var(--color-text-primary)">10:50</b> · Drop bags: <b style="color:var(--color-text-primary)">12:50</b> · Clear security: <b style="color:var(--color-text-primary)">13:20</b> · Boarding: <b style="color:var(--color-text-primary)">13:20</b><br>
+        Bagagem de mão Economy: 1 peça até <b style="color:var(--color-text-primary)">7 kg</b>, máximo <b style="color:var(--color-text-primary)">55 × 38 × 22 cm</b>. Bagagem porão no bilhete: <b style="color:var(--color-text-primary)">25 kg</b>.<br><br>
+        Na chegada a Dammam: procura representante com placa com o teu nome ou "EventBox" — transfer já organizado.
+      </div>
+    </div>
+  </div>
+
+  <!-- HOTEL -->
+  <div id="tab-hotel" class="section">
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-building" aria-hidden="true"></i> DoubleTree by Hilton — Dhahran</div>
+      <div class="info-card-body">
+        King Saud Bin Abdulaziz Road, Dhahran, Al Khobar 31952, Saudi Arabia<br>
+        Tel: <b style="color:var(--color-text-primary)">+966 13 331 1144</b><br><br>
+        Check-in: <b style="color:var(--color-text-primary)">25 maio</b> (chegada real 26 mai — quarto pode estar disponível mais tarde)<br>
+        Check-out: <b style="color:var(--color-text-primary)">8 junho</b><br>
+        Quarto: <b style="color:var(--color-text-primary)">TWIN</b> — partilhado com Luís Filipe Santos Mascarenhas
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-shirt" aria-hidden="true"></i> Benefício incluído</div>
+      <div class="info-card-body">Lavandaria: <b style="color:var(--color-text-primary)">3 peças por dia</b> incluídas (gratuito).</div>
+    </div>
+  </div>
+
+  <!-- SHOWS -->
+  <div id="tab-shows" class="section">
+    <div class="info-card">
+      <div class="info-card-title">Horário diário de shows — Dhahran Mall</div>
+      <div class="info-card-body" style="margin-bottom:0;">
+        <div class="show-row"><span class="show-name">Atividades abertas</span><span class="show-time">15:00 – 23:00</span></div>
+        <div class="show-row"><span class="show-name">Show 1</span><span class="show-time">17:30 – 18:00</span></div>
+        <div class="show-row"><span class="show-name">Meet & Greet 1</span><span class="show-time">18:05 – 18:20</span></div>
+        <div class="show-row"><span class="show-name">Show 2</span><span class="show-time">20:30 – 21:00</span></div>
+        <div class="show-row"><span class="show-name">Meet & Greet 2</span><span class="show-time">21:05 – 21:20</span></div>
+        <div class="show-row"><span class="show-name">Show 3</span><span class="show-time">22:30 – 23:00</span></div>
+        <div class="show-row"><span class="show-name">Meet & Greet 3</span><span class="show-time">23:05 – 23:20</span></div>
+        <div class="show-row"><span class="show-name" style="color:var(--color-text-tertiary)">Break entre shows</span><span class="show-time" style="color:var(--color-text-tertiary)">40 min</span></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Prayer times (durante o tour)</div>
+      <div class="info-card-body" style="padding:0;">
+        <div class="prayer-row header" style="padding:6px 0;"><span>Data</span><span>Asr</span><span>Maghrib</span><span>Isha</span></div>
+        <div class="prayer-row"><span>28 qui</span><span>15:04</span><span>18:26</span><span>19:56</span></div>
+        <div class="prayer-row"><span>29 sex</span><span>15:04</span><span>18:27</span><span>19:57</span></div>
+        <div class="prayer-row"><span>30 sáb</span><span>15:04</span><span>18:27</span><span>19:57</span></div>
+        <div class="prayer-row"><span>31 dom</span><span>15:04</span><span>18:28</span><span>19:58</span></div>
+        <div class="prayer-row"><span>1 seg</span><span>15:05</span><span>18:28</span><span>19:58</span></div>
+        <div class="prayer-row"><span>2 ter</span><span>15:05</span><span>18:29</span><span>19:59</span></div>
+        <div class="prayer-row"><span>3 qua</span><span>15:05</span><span>18:29</span><span>19:59</span></div>
+        <div class="prayer-row"><span>4 qui</span><span>15:05</span><span>18:30</span><span>20:00</span></div>
+        <div class="prayer-row"><span>5 sex</span><span>15:05</span><span>18:30</span><span>20:00</span></div>
+        <div class="prayer-row"><span>6 sáb</span><span>15:05</span><span>18:31</span><span>20:01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO ÚTIL -->
+  <div id="tab-info" class="section">
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-phone" aria-hidden="true"></i> Números de emergência</div>
+      <div class="info-card-body">
+        Polícia: <b style="color:var(--color-text-primary)">999</b> · Ambulância: <b style="color:var(--color-text-primary)">997</b> · Emergência: <b style="color:var(--color-text-primary)">112</b>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-flag" aria-hidden="true"></i> Embaixada de Portugal na Arábia Saudita</div>
+      <div class="info-card-body">
+        Tel: <b style="color:var(--color-text-primary)">+966 114 826 964</b><br>
+        Email: riade@mne.pt<br>
+        Bldg 56, Al Woroud District, Riyadh 12251
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-alert-circle" aria-hidden="true"></i> Alfândega — proibições</div>
+      <div class="info-card-body">Pornografia e narcóticos de qualquer tipo são <b style="color:var(--color-text-danger)">estritamente proibidos</b>. Consulta as regras completas em roafly.com/blog/saudi-arabia-airport-customs-rules</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-luggage" aria-hidden="true"></i> Bagagem Emirates</div>
+      <div class="info-card-body">
+        Bilhete Emirates: bagagem de porão <b style="color:var(--color-text-primary)">25 kg</b> em cada perna.<br>
+        Economy Class: 1 peça de cabine até <b style="color:var(--color-text-primary)">7 kg</b>, máximo <b style="color:var(--color-text-primary)">55 × 38 × 22 cm</b>. Nenhum item individual no porão pode exceder 32 kg.
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-shield-alert" aria-hidden="true"></i> Atenção no trânsito pelo Dubai</div>
+      <div class="info-card-body">
+        O recibo Emirates reforça política de tolerância zero para drogas nos Emirados Árabes Unidos, incluindo passageiros em trânsito. Evitar transportar substâncias, medicamentos ou itens duvidosos sem confirmação prévia.
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-users" aria-hidden="true"></i> Equipa no mesmo voo EK192 (25 mai)</div>
+      <div class="info-card-body">
+        Bruno Miguel Nandyala Delgado (tu) — Stagehand<br>
+        Equipa partilha cor no documento — procura os da mesma cor no aeroporto.
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title"><i class="ti ti-map-pin" aria-hidden="true"></i> Local do evento</div>
+      <div class="info-card-body">
+        Dhahran Mall · Organizado por Eventbox<br>
+        Contacto Eventbox: +961 9 211270 · www.eventboxonline.com
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+}
+
+const taskStoreKey = 'arabia-trip-task-state-v1';
+
+function getTaskState() {
+  try {
+    return JSON.parse(localStorage.getItem(taskStoreKey) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveTaskState(state) {
+  try {
+    localStorage.setItem(taskStoreKey, JSON.stringify(state));
+  } catch {
+    // If storage is unavailable, the checklist still works for the current page view.
+  }
+}
+
+function taskId(task) {
+  const section = task.closest('.section')?.id || 'page';
+  const text = task.textContent.trim().replace(/\s+/g, ' ');
+  let hash = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    hash = ((hash << 5) - hash + text.charCodeAt(i)) | 0;
+  }
+  return `${section}-${Math.abs(hash)}`;
+}
+
+function setTaskDone(task, done, state) {
+  task.classList.toggle('done', done);
+  task.setAttribute('aria-checked', String(done));
+  state[task.dataset.taskId] = done;
+}
+
+function initialiseTaskChecks() {
+  const state = getTaskState();
+  document.querySelectorAll('.task').forEach(task => {
+    task.dataset.taskId = taskId(task);
+    task.setAttribute('role', 'checkbox');
+    task.setAttribute('tabindex', '0');
+    setTaskDone(task, Boolean(state[task.dataset.taskId]), state);
+
+    task.addEventListener('click', () => {
+      const latestState = getTaskState();
+      setTaskDone(task, !task.classList.contains('done'), latestState);
+      saveTaskState(latestState);
+    });
+
+    task.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      task.click();
+    });
+  });
+  saveTaskState(state);
+}
+
+document.addEventListener('DOMContentLoaded', initialiseTaskChecks);
+</script>
+</body>
+</html>
