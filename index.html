@@ -93,6 +93,14 @@ body {
 .task:focus-visible { outline: 2px solid #7bbcff; outline-offset: 3px; }
 .task strong { color: var(--color-text-primary); font-weight: 500; }
 .task.done strong { color: inherit; }
+#tab-perguntas .todo-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+#tab-perguntas .info-card { padding: 16px; }
+#tab-perguntas .info-card-title { font-size: 15px; line-height: 1.35; margin-bottom: 10px; }
+#tab-perguntas .task-list { gap: 10px; }
+#tab-perguntas .task { grid-template-columns: 24px 1fr; gap: 10px; font-size: 15px; line-height: 1.55; color: #d7e2f2; padding: 6px 0; }
+#tab-perguntas .task::before { width: 18px; height: 18px; margin-top: 3px; }
+#tab-perguntas .task.done { color: #97a5b8; }
+#tab-perguntas .task.done::before { font-size: 13px; }
 .mini-note { font-size: 12px; color: var(--color-text-tertiary); margin-top: 6px; line-height: 1.45; }
 .todo-hero { background: linear-gradient(135deg, #1b2230, #121722); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 14px; margin-bottom: 10px; }
 .todo-hero-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
@@ -132,6 +140,13 @@ body {
   .todo-grid { grid-template-columns: 1fr; }
   .task { grid-template-columns: 22px 1fr; font-size: 13px; padding: 5px 0; }
   .task::before { width: 16px; height: 16px; margin-top: 2px; }
+  #tab-perguntas .todo-grid { grid-template-columns: 1fr; gap: 10px; }
+  #tab-perguntas .info-card { padding: 14px; }
+  #tab-perguntas .info-card-title { font-size: 16px; margin-bottom: 12px; }
+  #tab-perguntas .task-list { gap: 12px; }
+  #tab-perguntas .task { grid-template-columns: 28px 1fr; gap: 12px; font-size: 16px; line-height: 1.6; padding: 8px 0; color: #edf4ff; }
+  #tab-perguntas .task::before { width: 20px; height: 20px; margin-top: 3px; border-width: 1.5px; }
+  #tab-perguntas .task.done::before { font-size: 14px; }
   .info-card { padding: 12px; }
   .prayer-row { grid-template-columns: 64px 1fr 1fr 1fr; }
   .essay-card { padding: 14px; }
