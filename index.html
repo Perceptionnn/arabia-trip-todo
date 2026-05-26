@@ -99,6 +99,17 @@ body {
 .todo-hero-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
 .todo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; }
 .priority-tag { display: inline-block; font-size: 11px; line-height: 1; padding: 5px 8px; border-radius: 999px; background: #493412; color: #ffdfa3; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+.offline-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 10px 12px; border: 0.5px solid #2dbb91; border-radius: var(--border-radius-md); background: rgba(45, 187, 145, 0.1); color: #95efd4; font-size: 12px; line-height: 1.4; }
+.offline-banner strong { color: #d9fff2; }
+.essay-page { max-width: 880px; margin: 0 auto; }
+.essay-card { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 18px; margin-bottom: 10px; }
+.essay-kicker { display: inline-block; font-size: 11px; line-height: 1; padding: 5px 8px; border-radius: 999px; background: #173455; color: #a9d5ff; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.essay-title { font-size: 22px; line-height: 1.25; color: var(--color-text-primary); font-weight: 700; margin-bottom: 8px; }
+.essay-lead { font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); }
+.essay-section-title { font-size: 15px; line-height: 1.35; color: var(--color-text-primary); font-weight: 700; margin-bottom: 8px; }
+.essay-card p { font-size: 14px; line-height: 1.75; color: var(--color-text-secondary); margin-bottom: 10px; }
+.essay-card p:last-child { margin-bottom: 0; }
+.phrase { color: var(--color-text-primary); font-weight: 600; }
 @media (max-width: 720px) {
   body { padding: 10px; }
   .erp { padding: 14px; border-radius: 8px; }
@@ -123,6 +134,10 @@ body {
   .task::before { width: 16px; height: 16px; margin-top: 2px; }
   .info-card { padding: 12px; }
   .prayer-row { grid-template-columns: 64px 1fr 1fr 1fr; }
+  .essay-card { padding: 14px; }
+  .essay-title { font-size: 19px; }
+  .essay-lead { font-size: 14px; }
+  .essay-card p { font-size: 13px; line-height: 1.7; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr; }
@@ -136,6 +151,9 @@ body {
 <body>
 
 <div class="erp">
+  <div class="offline-banner">
+    <span><strong>Modo offline:</strong> este ficheiro funciona sem internet depois de estar guardado no telemóvel. As tarefas marcadas ficam guardadas neste browser/dispositivo.</span>
+  </div>
   <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">ERP da viagem de Bruno à Arábia Saudita — cronologia completa</h2>
   <div class="header">
     <div>
@@ -155,6 +173,8 @@ body {
 
   <div class="tabs">
     <div class="tab active" onclick="switchTab('cronologia')"><i class="ti ti-calendar" aria-hidden="true"></i> Cronologia</div>
+    <div class="tab" onclick="switchTab('reuniao26')"><i class="ti ti-message-circle" aria-hidden="true"></i> Reunião 26 Maio</div>
+    <div class="tab" onclick="switchTab('hoje')"><i class="ti ti-sun" aria-hidden="true"></i> Hoje 26/05</div>
     <div class="tab" onclick="switchTab('afazer')"><i class="ti ti-list-check" aria-hidden="true"></i> A fazer</div>
     <div class="tab" onclick="switchTab('todo')"><i class="ti ti-checkup-list" aria-hidden="true"></i> To do list</div>
     <div class="tab" onclick="switchTab('voo')"><i class="ti ti-plane" aria-hidden="true"></i> Voos</div>
@@ -336,6 +356,416 @@ body {
       </div>
     </div>
 
+  </div>
+
+  <!-- REUNIAO 26 MAIO -->
+  <div id="tab-reuniao26" class="section">
+    <div class="essay-page">
+      <div class="essay-card">
+        <div class="essay-kicker">Preparação para hoje</div>
+        <div class="essay-title">Reunião 26 Maio — o que eles esperam alinhar contigo hoje</div>
+        <div class="essay-lead">
+          Pela reunião anterior, hoje não é suposto entrares como alguém que já domina o espetáculo. Eles sabem que és novo na EventBox e que este show é novo para ti. O que vão querer perceber é se chegas atento, capaz de aprender depressa, fazer perguntas certas e transformar a instalação da noite num mapa prático para trabalhares com segurança nos ensaios e depois nos shows.
+        </div>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">O tom certo para entrares nesta reunião</div>
+        <p>
+          A melhor postura hoje é uma mistura de humildade operacional com presença profissional. Não precisas de fingir que já sabes tudo. Pelo contrário, a reunião anterior deixou claro que a equipa espera apoiar-te porque és novo neste contexto. O que eles não querem é alguém passivo, perdido ou à espera que lhe digam cada movimento no momento em que o show já está a acontecer. A tua frase mental deve ser: “ainda estou a aprender o show, mas vou sair daqui com o processo mapeado”.
+        </p>
+        <p>
+          Se hoje falares com Pinar, produção local, guarda-roupa, dance captain ou a pessoa local de backstage, o teu objetivo é mostrar que entendeste a responsabilidade: backstage limpo, props no sítio certo, cortina preparada, portas funcionais, mecanismos compreendidos e resets feitos sem atrasar o show. Eles vão confiar mais em ti se te virem a tomar notas, pedir demonstrações e repetir o processo em voz alta para confirmar.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">O que provavelmente vão querer falar hoje</div>
+        <p>
+          Hoje devem voltar aos mesmos pontos centrais da reunião anterior, mas de forma mais concreta, porque já estarás no local ou perto dele. O primeiro tema deve ser a tua orientação no espaço: onde fica o backstage, de que lado vais operar, por onde entram e saem performers, onde ficam os adereços, onde está o guarda-roupa e quem é a pessoa local que fica contigo. Isto é essencial porque, durante o show, há ações simultâneas nos dois lados e não podes descobrir caminhos no momento em que alguém precisa passar.
+        </p>
+        <p>
+          O segundo tema deve ser a cortina vermelha. Na reunião, explicaram que tens de preparar uma cortina atrás do palco para que, num certo momento, pareça danificada. Isso envolve prender a cortina com uma corda, soltar no timing correto e depois repor tudo para o próximo show. Hoje eles devem esperar que vejas o mecanismo físico: onde a corda prende, como a cortina fica armada, o que acontece quando soltas, quanto tempo demora a repor e o que pode correr mal.
+        </p>
+        <p>
+          O terceiro tema deve ser portas e mecanismos. Falaram de abrir portas ao mesmo tempo, passar cordas ou elementos para palco e resolver coisas que encravam, soltam ou ficam desalinhadas. Hoje não basta saber que “há portas”; tens de perceber a mecânica real: onde se segura, se há dobradiça/trilho/trava, se precisa de coordenação com o outro lado e qual é o sinal para agir.
+        </p>
+        <p>
+          O quarto tema deve ser a divisão de props. A reunião foi clara: alguns adereços ficam com o guarda-roupa, outros contigo, e há uma cage/jaula de puppets/adereços. Hoje tens de transformar isto numa divisão concreta. “Este é meu, este é wardrobe, este é backup, este fica aqui antes do show, este volta para ali depois.” Se não fizeres essa separação cedo, vais depender da memória dos outros em dias de pressão.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">O que deves estudar antes de falares com eles</div>
+        <p>
+          Antes da reunião ou instalação, revê mentalmente o vídeo do show com outro olhar. Não vejas como público; vê como operador de backstage. Sempre que acontecer uma entrada, saída, queda de cortina, abertura de porta, entrega de elemento ou mudança de cena, pergunta: “quem preparou isto antes?”, “de que lado entrou?”, “quanto tempo teve para resetar?”, “isto depende de cue musical, fala, movimento ou ordem do show caller?”.
+        </p>
+        <p>
+          Estuda especialmente os momentos em que o espetáculo parece simples para o público mas deve ser complexo atrás. Se uma porta abre no momento certo, alguém esteve parado à espera da cue. Se uma cortina parece danificada, alguém armou antes e soltou no momento exato. Se um puppet ou adereço aparece limpo, alguém o deixou no sítio certo, entregou à pessoa certa e depois recuperou sem bloquear performers. O teu estudo hoje deve ser essa tradução do que se vê de frente para o que tem de acontecer atrás.
+        </p>
+        <p>
+          Também deves estudar os nomes funcionais das coisas. Mesmo que não saibas o termo técnico perfeito, escolhe palavras simples: red curtain, rope, left door, right door, puppet cage, stickers, reset, cue, wardrobe side, Bruno side. Quanto mais consistente fores nos nomes, mais fácil será comunicar quando houver pressa.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">Como te preparares para a conversa sobre a cortina</div>
+        <p>
+          A cortina é provavelmente uma das tuas responsabilidades mais sensíveis, porque tem efeito visual e precisa de reset. Quando te mostrarem a cortina, não te limites a olhar. Pede para ver o ciclo inteiro devagar. Primeiro, como fica preparada antes do show. Depois, como é acionada. Depois, como se confirma que o efeito resultou. Finalmente, como é reposta para o próximo show.
+        </p>
+        <p>
+          A pergunta mais importante é: <span class="phrase">“Can you show me once slowly, then I repeat it?”</span>. Isto mostra profissionalismo. Não é fraqueza. Se fizeres tu uma vez, mesmo devagar, o teu corpo começa a memorizar. Depois pergunta: <span class="phrase">“What usually goes wrong with this?”</span>. Eles podem dizer que a corda torce, a cortina prende, o tecido cai cedo, o reset fica torto ou algum parafuso solta. Essa informação vale ouro porque te prepara para problemas reais, não para teoria.
+        </p>
+        <p>
+          Deves sair dessa parte sabendo explicar a ti próprio, numa frase simples, o processo completo: “antes do show deixo a cortina presa assim; no cue faço isto; depois do momento volto ali, prendo novamente, verifico a corda e confirmo que está pronta para o próximo show.” Se não conseguires dizer isso sem hesitar, ainda falta uma pergunta.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">Como te preparares para portas e mecanismos</div>
+        <p>
+          As portas são menos glamorosas, mas podem ser onde o erro aparece mais depressa. Uma porta que abre tarde, abre cedo, não fecha ou mostra backstage pode estragar um momento. Hoje tens de perceber se as portas dependem de ti sozinho ou de sincronização com outra pessoa. A reunião mencionou ações simultâneas nos dois lados, por isso pergunta sempre de onde vem o sinal: show caller, dance captain, música, fala, gesto de performer ou pessoa do outro lado.
+        </p>
+        <p>
+          Não uses força como primeira solução. Em backstage, “forçar” pode partir, desalinhavar ou criar risco para performers. O que precisas de saber é o movimento correto: puxar para cima antes de abrir, empurrar num ângulo, libertar uma trava, alinhar uma roda, segurar numa zona específica. Pergunta diretamente: <span class="phrase">“If this gets stuck, what is the safest way to fix it?”</span>.
+        </p>
+        <p>
+          Também deves confirmar o que não deves tocar. Isto parece pequeno, mas é sinal de maturidade técnica. Uma boa pergunta é: <span class="phrase">“Is there anything here I should not touch or force?”</span>. A resposta vai proteger-te de mexer em algo que pertence à produção local ou que pode afetar estrutura, segurança ou warranty do material.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">Como te preparares para props e guarda-roupa</div>
+        <p>
+          A reunião deixou claro que vais dividir responsabilidades com o guarda-roupa. Isso significa que hoje tens de evitar uma zona cinzenta. Zona cinzenta é quando todos acham que alguém tratou de um prop, mas ninguém tratou. O teu trabalho é transformar cada elemento em responsabilidade concreta. Quando vires a cage/jaula de puppets ou adereços, pergunta: <span class="phrase">“Which ones are mine during the show, and which ones are wardrobe?”</span>.
+        </p>
+        <p>
+          Depois pergunta onde cada item fica antes do show e para onde volta depois. O preset é tão importante quanto a ação em palco. Se antes do show o objeto já está no sítio errado, durante o show não tens tempo para resolver com calma. A tua preparação deve criar uma memória visual: isto fica aqui, virado assim, acessível por este lado, sem bloquear esta passagem.
+        </p>
+        <p>
+          A pessoa de guarda-roupa aparentemente já fez este espetáculo antes, há dois anos. Isso é uma vantagem enorme. Aproxima-te dela com humildade prática. Uma boa frase é: <span class="phrase">“Since you know this show, what should I pay attention to backstage?”</span>. Ela pode dar-te atalhos que nenhum documento tem.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">Como deves falar para parecer preparado sem fingir experiência</div>
+        <p>
+          O teu discurso hoje deve ser claro, curto e orientado para ação. Em vez de dizer “não sei nada disto”, diz: <span class="phrase">“I watched the video, but I need to connect the video with the backstage mechanics.”</span>. Isto comunica exatamente a tua situação: viste o show, mas agora precisas de traduzir o vídeo para operação real.
+        </p>
+        <p>
+          Outra frase forte é: <span class="phrase">“My priority tonight is to understand the preset, the cue, and the reset for each thing I operate.”</span>. Esta frase mostra que percebes a estrutura profissional do trabalho. Não é só “abrir uma porta” ou “puxar uma corda”; é preparar antes, agir no momento certo e repor depois.
+        </p>
+        <p>
+          Se alguém explicar rápido demais, interrompe com educação. Diz: <span class="phrase">“Can I repeat it back to make sure I understood?”</span>. Depois explicas com as tuas palavras. Esta técnica evita mal-entendidos e dá confiança à equipa, porque eles ouvem que tu sabes o que vais fazer.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">O que eles vão querer sentir de ti hoje</div>
+        <p>
+          Eles vão querer sentir que não és uma pessoa que precisa ser carregada pela equipa o tempo todo. Mesmo sendo novo, podes transmitir confiança se fores organizado. Confiança hoje não vem de saber tudo; vem de perguntares bem, apontares, repetires processos e confirmares responsabilidades. A equipa já sabe que o show é complicado. O que eles precisam ver é que vais reduzir o risco, não aumentá-lo.
+        </p>
+        <p>
+          Também vão querer sentir que és seguro em backstage. Segurança aqui significa não bloquear passagens, não deixar objetos no chão, não mexer em mecanismos sem entender, não criar ruído desnecessário, não entrar no caminho de performers e não desaparecer quando alguém precisa de ti. Se estiveres cansado da viagem, compensa com método: água, telemóvel carregado, notas simples e foco.
+        </p>
+        <p>
+          A tua meta para o fim da reunião/instalação é conseguires dizer: “sei onde vou estar, sei quem me ajuda, sei o que preparo, sei o que aciono, sei como resetar e sei quem chamo se algo falhar.” Se chegares a esse ponto, hoje correu bem.
+        </p>
+      </div>
+
+      <div class="essay-card">
+        <div class="essay-section-title">Preparação final antes de entrares</div>
+        <p>
+          Antes de encontrares a equipa, abre esta página e lê esta frase: o teu trabalho hoje é transformar incerteza em mapa. Não tens de sair especialista no show inteiro, mas tens de sair muito menos vulnerável do que entraste. Vê, pergunta, repete, testa, aponta e confirma.
+        </p>
+        <p>
+          Entra com o telemóvel carregado, uma nota aberta, roupa discreta, água e energia controlada. Quando te mostrarem um mecanismo, pensa sempre em três tempos: antes, durante e depois. Antes é preset. Durante é cue. Depois é reset. Se souberes estes três tempos para cortina, portas e props, estás preparado para crescer no ensaio de amanhã.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOJE 26 MAIO -->
+  <div id="tab-hoje" class="section">
+    <div class="todo-hero">
+      <div class="priority-tag">Briefing operacional de hoje</div>
+      <div class="todo-hero-title">Terça-feira, 26 maio — chegada à Arábia Saudita + instalação</div>
+      <div class="todo-hero-body">
+        Hoje é um dia de transição: aterrar, passar imigração, encontrar a EventBox, chegar ao hotel, recuperar energia e preparar a instalação da noite. O objetivo não é “fazer tudo perfeito” já; é ficares orientado, descansado o suficiente e com as perguntas certas prontas.
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Linha do tempo de hoje</div>
+      <div class="info-card-body">
+        <div class="show-row"><span class="show-name">01:35</span><span class="show-time">Chegada a Dubai (DXB), Terminal 3</span></div>
+        <div class="show-row"><span class="show-name">04:40</span><span class="show-time">Check-in/ligação indicada para EK827</span></div>
+        <div class="show-row"><span class="show-name">07:40</span><span class="show-time">Partida Dubai → Dammam</span></div>
+        <div class="show-row"><span class="show-name">08:05</span><span class="show-time">Chegada a Dammam (DMM), King Fahd International Airport</span></div>
+        <div class="show-row"><span class="show-name">Manhã</span><span class="show-time">Imigração, bagagem, transfer EventBox, hotel</span></div>
+        <div class="show-row"><span class="show-name">Tarde</span><span class="show-time">Descanso, alimentação, reconhecimento e contactos</span></div>
+        <div class="show-row"><span class="show-name">Noite</span><span class="show-time">Instalação com equipa de produção</span></div>
+      </div>
+    </div>
+
+    <div class="todo-grid">
+      <div class="info-card">
+        <div class="info-card-title">1. Dubai — escala antes do voo para Dammam</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Assim que saíres do avião, confirmar no ecrã o gate do voo <strong>EK827 Dubai → Dammam</strong>.</span></div>
+            <div class="task"><span>Manter-te dentro do Terminal 3; não sair do aeroporto durante esta escala.</span></div>
+            <div class="task"><span>Carregar telemóvel/powerbank e manter o cabo acessível.</span></div>
+            <div class="task"><span>Comprar ou encher água, comer algo leve e evitar ficar demasiado tempo nas lojas.</span></div>
+            <div class="task"><span>Colocar alarme para estares perto do gate com margem, idealmente antes das 06:45.</span></div>
+            <div class="task"><span>Guardar boarding pass e passaporte num bolso seguro e sempre repetível, para não andares a procurar sob stress.</span></div>
+          </div>
+          <div class="mini-note">DXB é grande. O maior risco aqui não é a cidade; é distração, cansaço e perder noção do tempo.</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">2. Chegada a Dammam — aeroporto DMM</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Preparar passaporte, visto e comprovativos no telemóvel antes da imigração.</span></div>
+            <div class="task"><span>Na imigração, responder de forma simples: vens trabalhar num evento/show com a EventBox/Paw Patrol Tour, se perguntarem.</span></div>
+            <div class="task"><span>Recolher bagagem e confirmar que nada ficou danificado ou em falta.</span></div>
+            <div class="task"><span>Procurar representante com placa com o teu nome ou <strong>EventBox</strong>.</span></div>
+            <div class="task"><span>Se não encontrares ninguém, ligar/escrever para Teresa, Vlad, Pinar ou contacto EventBox antes de sair do terminal.</span></div>
+            <div class="task"><span>Ativar eSIM/roaming ou usar Wi‑Fi do aeroporto para avisar que chegaste.</span></div>
+          </div>
+          <div class="mini-note">O transfer está indicado como organizado pela EventBox. Não apanhes táxi sozinho sem confirmar com a equipa.</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">3. Transfer até ao hotel</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Destino: <strong>DoubleTree by Hilton Dhahran</strong>.</span></div>
+            <div class="task"><span>Tempo estimado do aeroporto ao hotel: cerca de 35–45 min de carro; conta com até 60 min se houver espera/trânsito.</span></div>
+            <div class="task"><span>No carro, confirma discretamente o plano do dia: hotel primeiro, hora de chamada, hora de ida ao mall e quem coordena.</span></div>
+            <div class="task"><span>Guardar no Maps o hotel e o Dhahran Mall para teres referência offline.</span></div>
+            <div class="task"><span>Não dispersar do grupo; a reunião deixou claro que os transportes são em grupo e por agenda.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">4. Hotel — check-in e recuperação</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Confirmar quarto <strong>TWIN</strong>, check-out a 8 junho e eventual partilha com Luís Filipe Santos Mascarenhas.</span></div>
+            <div class="task"><span>Confirmar pequeno-almoço, horários e política de lavandaria: 3 peças por dia incluídas.</span></div>
+            <div class="task"><span>Tomar banho, trocar roupa de viagem e separar uma muda preta/comfortável para a instalação da noite.</span></div>
+            <div class="task"><span>Carregar telemóvel, powerbank, headphones e qualquer equipamento necessário.</span></div>
+            <div class="task"><span>Comer algo simples e beber água. Hoje não é dia para chegar desidratado à montagem.</span></div>
+            <div class="task"><span>Dormir uma sesta se houver janela. Mesmo 60–90 min ajudam muito.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">5. Antes de ires ao mall/local hoje</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Levar passaporte ou cópia/ID conforme orientação da produção; não levar documentos soltos sem necessidade.</span></div>
+            <div class="task"><span>Levar telemóvel carregado, powerbank, cabo, garrafa de água, snack e bloco/notas no telemóvel.</span></div>
+            <div class="task"><span>Usar roupa discreta e prática: t-shirt com mangas, calças confortáveis, ténis fechados. Evitar sem mangas no mall/evento.</span></div>
+            <div class="task"><span>Se tiveres ferramentas pequenas: multitool/chave de fendas, fita, marcador, abraçadeiras, luvas ou lanterna/headlamp.</span></div>
+            <div class="task"><span>Confirmar quem vai contigo, hora de saída do hotel, ponto de encontro e como voltam.</span></div>
+            <div class="task"><span>Guardar contacto direto de quem estiver a liderar a instalação no local.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6. Instalação da noite — objetivo real</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Objetivo 1: sair de lá com um mapa mental claro do backstage: lado do Bruno, lado oposto, entradas/saídas, zona de props, wardrobe, backup, corredores livres e pontos onde não podes bloquear passagem.</span></div>
+            <div class="task"><span>Objetivo 2: perceber fisicamente o mecanismo da cortina vermelha: onde prende, onde solta, que corda aciona, como cai/parece danificada e como se rearma depois.</span></div>
+            <div class="task"><span>Objetivo 3: perceber as portas: quem abre, quem fecha, se é sincronizado com o outro lado, onde pode encravar e que movimento resolve sem força excessiva.</span></div>
+            <div class="task"><span>Objetivo 4: perceber os props: o que está na cage/jaula, o que é teu, o que é do guarda-roupa, onde fica cada item antes do show e para onde volta depois.</span></div>
+            <div class="task"><span>Objetivo 5: descobrir o plano de emergência: ferramentas disponíveis, quem decide reparações, quem chamar e o que nunca deves mexer sem autorização.</span></div>
+          </div>
+          <div class="mini-note">Hoje não é sobre decorar o show inteiro. É sobre compreender o sistema físico: o que mexe, como mexe, quem mexe, o que pode falhar e como repor rápido.</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6A. Antes de começares a mexer em qualquer coisa</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Pedir uma volta guiada ao backstage: “Can you walk me through my side and the key things I need to operate?”</span></div>
+            <div class="task"><span>Identificar quem manda na instalação naquele momento: produção local, Pinar/show caller, stage manager/local lead ou outro responsável.</span></div>
+            <div class="task"><span>Confirmar se podes filmar/fotografar referências técnicas para uso pessoal. Se não puder, fazer notas escritas.</span></div>
+            <div class="task"><span>Guardar no telemóvel uma nota chamada <strong>BACKSTAGE CUES</strong> com secções: cortina, portas, props, ferramentas, pessoas, dúvidas.</span></div>
+            <div class="task"><span>Observar primeiro, mexer depois. Antes de tocar num mecanismo, ver alguém fazer uma vez.</span></div>
+            <div class="task"><span>Pedir nomes simples para cada elemento: “red curtain”, “rope”, “door left”, “door right”, “puppet cage”, “stickers”, etc.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6B. Cortina vermelha — o que tens de dominar</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Localizar exatamente a cortina vermelha atrás do palco e perceber que “look” final ela deve ter quando parece danificada.</span></div>
+            <div class="task"><span>Identificar todos os pontos de fixação: topo, laterais, corda, nó, velcro, gancho, mosquetão, ilhós, trilho ou qualquer peça que segure tensão.</span></div>
+            <div class="task"><span>Pedir demonstração lenta: como se prepara antes do show, como fica presa e o que acontece quando a corda é solta.</span></div>
+            <div class="task"><span>Treinar o movimento de soltar sem puxar demais. O ideal é ser limpo, rápido e sem ficar preso na mão.</span></div>
+            <div class="task"><span>Treinar a reposição: quanto tempo demora, que ordem seguir, que lado prender primeiro e como confirmar que está pronta outra vez.</span></div>
+            <div class="task"><span>Perceber se há risco de a cortina cair cedo demais, cair pouco, encravar, ficar torta ou não parecer danificada o suficiente.</span></div>
+            <div class="task"><span>Perguntar: “If this does not drop properly during the show, what is the safest fix?”</span></div>
+            <div class="task"><span>Definir uma checklist de preset: cortina presa, corda acessível, nada enrolado, caminho livre, stickers no sítio, ferramenta de emergência próxima.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6C. Portas — sincronização e risco de encravar</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Identificar se tens uma porta só ou se estás a ajudar numa ação sincronizada com o outro lado.</span></div>
+            <div class="task"><span>Perceber o sentido de abertura/fecho e onde colocar as mãos para não entalar dedos.</span></div>
+            <div class="task"><span>Confirmar se a porta deve bater, fechar suave ou ficar numa posição exata para o público não ver backstage.</span></div>
+            <div class="task"><span>Testar abrir/fechar algumas vezes lentamente, depois em velocidade de show.</span></div>
+            <div class="task"><span>Identificar pontos que raspam, parafusos soltos, dobradiças, travas, fechos, rodas ou partes que precisem de alinhamento.</span></div>
+            <div class="task"><span>Perguntar: “When do I open? On music, line, gesture, or show caller cue?”</span></div>
+            <div class="task"><span>Confirmar comunicação com o outro lado: se ambos abrem ao mesmo tempo, qual é o sinal?</span></div>
+            <div class="task"><span>Plano B: se a porta não abrir/fechar, saber se deves insistir, deixar parcial, chamar alguém ou contornar por outro ponto.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6D. Ponto de ativação e mecanismos</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Marcar mentalmente onde fica o ponto de ativação: corda, puxador, gatilho, nó, trava, botão, pedal ou peça física.</span></div>
+            <div class="task"><span>Perceber se há tensão no mecanismo. Se houver, nunca pôr cara/dedos na linha de movimento.</span></div>
+            <div class="task"><span>Confirmar se o mecanismo precisa de ser “armado” antes de cada show ou só uma vez por dia.</span></div>
+            <div class="task"><span>Aprender a diferença entre posição <strong>pronto</strong>, posição <strong>acionado</strong> e posição <strong>reset</strong>.</span></div>
+            <div class="task"><span>Pedir para repetir o ciclo completo: preparar → acionar → confirmar efeito → resetar → deixar pronto.</span></div>
+            <div class="task"><span>Identificar que sinais visuais mostram que está mal preparado: corda torcida, nó frouxo, peça desalinhada, tecido preso, porta com folga.</span></div>
+            <div class="task"><span>Perguntar o que é proibido fazer: “Is there anything I should never force or adjust?”</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6E. Props, puppets e stickers</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Localizar a cage/jaula dos puppets/adereços e perceber se há uma ordem fixa de arrumação.</span></div>
+            <div class="task"><span>Separar responsabilidades: “This one is wardrobe, this one is Bruno, this one is backup.”</span></div>
+            <div class="task"><span>Confirmar quais props entram em palco, quais só ficam preparados e quais são entregues diretamente ao elenco.</span></div>
+            <div class="task"><span>Confirmar a corda/elemento que pode ter de ser entregue ao elenco em palco: de que lado, em que mão, a que altura e em que cue.</span></div>
+            <div class="task"><span>Ver onde ficam stickers/estrelas/autocolantes e como devem ficar na parede atrás da cortina.</span></div>
+            <div class="task"><span>Criar preset visual: antes de cada show, tudo tem de estar sempre no mesmo sítio. Se muda de sítio, vira erro.</span></div>
+            <div class="task"><span>Perguntar ao guarda-roupa o que ela já sabe do show anterior e que erros costumavam acontecer.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6F. Ferramentas e reparações rápidas</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Confirmar que ferramentas existem no local: chave de fendas, Allen, fita gaffer/isoladora, abraçadeiras, tesoura/cutter, alicate, parafusos, velcro, lanterna.</span></div>
+            <div class="task"><span>Perceber onde ficam guardadas e quem tem acesso durante o show.</span></div>
+            <div class="task"><span>Montar um mini ponto de emergência perto mas invisível: fita, abraçadeiras, lanterna e ferramenta básica, se autorizado.</span></div>
+            <div class="task"><span>Não deixar ferramenta solta em zona de passagem ou onde elenco possa tropeçar.</span></div>
+            <div class="task"><span>Se algo desapertar: saber se podes apertar imediatamente ou se a produção local tem de aprovar.</span></div>
+            <div class="task"><span>Se algo cair/soltar no meio do show: prioridade é segurança e continuidade, não perfeição estética.</span></div>
+            <div class="task"><span>Depois de qualquer reparação, testar o ciclo completo outra vez. Reparação não testada é só esperança.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6G. Como tomar notas sem te perderes</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Usar notas curtas por sequência, não parágrafos longos. Exemplo: “Preset: curtain rope left / stickers wall / door clear / cage ready”.</span></div>
+            <div class="task"><span>Dividir a nota em quatro blocos: <strong>Before show</strong>, <strong>During show</strong>, <strong>Reset</strong>, <strong>Problems</strong>.</span></div>
+            <div class="task"><span>Escrever cues com palavras que reconheces: música, fala, movimento do elenco, entrada de personagem, sinal da dance captain.</span></div>
+            <div class="task"><span>Desenhar um mapa simples do backstage no telemóvel ou papel: esquerda, direita, portas, cortina, cage, caminho do elenco.</span></div>
+            <div class="task"><span>Marcar dúvidas com “?” e resolver antes de sair da instalação.</span></div>
+            <div class="task"><span>No fim da noite, criar uma mini checklist final de 8–12 linhas para usar amanhã no ensaio.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">6H. Teste mínimo antes de ires embora</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Fazer pelo menos um ciclo completo da cortina: preset → acionar → reset.</span></div>
+            <div class="task"><span>Fazer pelo menos um ciclo completo das portas: abrir → fechar → confirmar alinhamento.</span></div>
+            <div class="task"><span>Simular a entrega de corda/prop ao elenco: onde estás, como entregas, para onde sais depois.</span></div>
+            <div class="task"><span>Confirmar onde cada prop fica antes do show e onde volta depois.</span></div>
+            <div class="task"><span>Confirmar com Pinar/dance captain/guarda-roupa: “Is there anything else I must know before rehearsal?”</span></div>
+            <div class="task"><span>Sair com call time de amanhã, contacto de emergência e lista de dúvidas resolvidas.</span></div>
+          </div>
+          <div class="mini-note">Se hoje só conseguires uma coisa, que seja esta: conseguir explicar a outra pessoa, em voz alta, como preparar, acionar e resetar cortina/portas/props.</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">7. Perguntas inteligentes para fazer hoje</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Quem é a pessoa local que fica comigo no backstage?</span></div>
+            <div class="task"><span>Qual é exatamente o meu lado no palco/backstage?</span></div>
+            <div class="task"><span>Que props são minha responsabilidade e quais são do guarda-roupa?</span></div>
+            <div class="task"><span>Quando algo encrava/solta, quem decide se eu reparo ou se chamamos produção?</span></div>
+            <div class="task"><span>Onde ficam ferramentas, fita, parafusos, abraçadeiras e material de emergência?</span></div>
+            <div class="task"><span>Como comunicamos entre os dois lados: voz, sinais, intercom, WhatsApp ou runner?</span></div>
+            <div class="task"><span>Qual é o call time de amanhã e onde é o ponto de encontro?</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">7A. Frases úteis em inglês para a instalação</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span><strong>Para pedir demonstração:</strong> “Can you show me once slowly, then I repeat it?”</span></div>
+            <div class="task"><span><strong>Para confirmar responsabilidade:</strong> “Is this my responsibility during the show or wardrobe's?”</span></div>
+            <div class="task"><span><strong>Para confirmar cue:</strong> “What is my cue: music, line, movement, or show caller?”</span></div>
+            <div class="task"><span><strong>Para confirmar reset:</strong> “After this happens, how do I reset it for the next show?”</span></div>
+            <div class="task"><span><strong>Para problemas:</strong> “If this gets stuck, what is the safest way to fix it?”</span></div>
+            <div class="task"><span><strong>Para limites:</strong> “Is there anything here I should not touch or force?”</span></div>
+            <div class="task"><span><strong>Para comunicação:</strong> “Who gives me the go signal from the other side?”</span></div>
+            <div class="task"><span><strong>Para fechar a noite:</strong> “Can we do one full cycle before we leave, just to make sure I understood?”</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">8. O que evitar hoje</div>
+        <div class="info-card-body">
+          <div class="task-list">
+            <div class="task"><span>Não sair sozinho do aeroporto ou do hotel sem alinhar com a equipa.</span></div>
+            <div class="task"><span>Não aceitar tarefas críticas sem pedir demonstração uma vez, se não tiveres percebido.</span></div>
+            <div class="task"><span>Não fingir que sabes um mecanismo se ainda não viste onde prende/solta/rearma.</span></div>
+            <div class="task"><span>Não deixar o telemóvel descarregar; hoje ele é mapa, contacto, documentos e notas.</span></div>
+            <div class="task"><span>Não gastar energia social sem necessidade; vais precisar de foco na noite.</span></div>
+            <div class="task"><span>Não deixar dúvidas para o primeiro show. Tudo o que parecer confuso hoje deve virar pergunta.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Resumo mental para hoje</div>
+      <div class="info-card-body">
+        <strong style="color:var(--color-text-primary)">Modo certo:</strong> calmo, atento, discreto e perguntador. Hoje não tens de provar que sabes tudo; tens de construir rapidamente um mapa do sistema. A melhor impressão vem de chegares preparado, tomares notas, confirmares timings e deixares claro que és confiável quando o backstage começar a mexer.
+      </div>
+    </div>
   </div>
 
   <!-- A FAZER -->
